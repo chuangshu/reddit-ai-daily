@@ -2,7 +2,7 @@
 
 每日精选 GitHub 上最热门的 AI/Automation/Development Skills 和项目。
 
-**🔗 在线阅读**: https://chuangshu.github.io/reddit-ai-daily/
+**🔗 在线阅读**: https://chuangshu.github.io/github-skills-daily/
 
 **📊 数据来源**: GitHub Trending API + Awesome Lists
 
