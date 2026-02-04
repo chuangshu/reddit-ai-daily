@@ -1,0 +1,10 @@
+{
+  "monitored_subreddits": [
+    {"name": "artificial", "min_upvotes": 500, "min_comments": 50},
+    {"name": "MachineLearning", "min_upvotes": 300, "min_comments": 30},
+    {"name": "OpenAI", "min_upvotes": 200, "min_comments": 30},
+    {"name": "LocalLLaMA", "min_upvotes": 100, "min_comments": 20}
+  ],
+  "output_dir": "/root/clawd/reddit-ai/daily",
+  "data_dir": "/root/clawd/reddit-ai/data"
+}
