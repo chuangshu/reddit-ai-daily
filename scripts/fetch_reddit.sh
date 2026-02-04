@@ -1,16 +1,15 @@
 #!/bin/bash
-# 获取 Reddit 热门帖子
+# 获取 Reddit AI 热门帖子 - 使用搜索方式
 
-SUBREDDIT=$1
-MIN_UPVOTES=${2:-500}
-OUTPUT_DIR=${3:-/root/clawd/reddit-ai/data}
+OUTPUT_DIR=${1:-/root/clawd/reddit-ai/data}
 
-# Reddit RSS feed
-RSS_URL="https://www.reddit.com/r/${SUBREDDIT}/top/.rss?t=day"
+echo "Fetching Reddit AI热门..."
 
-echo "Fetching r/${SUBREDDIT}..."
+# 使用 DuckDuckGo 搜索 Reddit AI 热门
+QUERY="site:reddit.com/r/artificial OR site:reddit.com/r/MachineLearning OR site:reddit.com/r/OpenAI"
 
-# 抓取并解析 RSS
-curl -s "$RSS_URL" | grep -oP '<title>[^<]+</title>' | head -20
+# 搜索并保存结果
+curl -s "https://html.duckduckgo.com/html/?q=${QUERY}&t=h&ia=web" > "${OUTPUT_DIR}/reddit_search.html"
 
-echo "Done for r/${SUBREDDIT}"
+echo "Saved: ${OUTPUT_DIR}/reddit_search.html"
+echo "Done!"
