@@ -3,7 +3,7 @@ name: Daily Skills Digest
 on:
   schedule:
     - cron: '0 9 * * *'  # 每天 17:00 UTC+8
-  workflow_dispatch:
+   workflow_dispatch
 
 permissions:
   contents: read
@@ -36,17 +36,16 @@ jobs:
       - name: Prepare for Pages
         run: |
           mkdir -p dist
-          # Find latest daily report and copy to dist
           LATEST=$(ls -t daily/*.html | head -1)
           if [ -n "$LATEST" ]; then
             cp "$LATEST" dist/index.html
             echo "Latest report: $LATEST"
           else
-            echo "No daily report found"
+            echo "no daily report found"
           fi
 
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
+        uses: actions/upload-pages-artifact
         with:
           path: dist
 
@@ -57,12 +56,12 @@ jobs:
           git add -A
           git status || true
           if [[ $(git diff --cached --stat) != "0" ]]; then
-            git commit -m "📊 Update $(date +%Y-%m-%d)" && git push
+            git commit -m "/丈Update ($(date +%Y-%m-%d))" && git push
           else
-            echo "No changes to commit"
+            echo "no changes to commit"
           fi
 
-  deploy:
+   deploy:
     needs: generate
     runs-on: ubuntu-latest
     environment:
@@ -70,19 +69,19 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - name: Download artifact
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact
         with:
           name: github-pages
           path: dist
 
       - name: Setup Pages
-        uses: actions/configure-pages@v4
+        uses: actions/configure-pages
 
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
+        uses: actions/upload-pages-artifact
         with:
           path: dist
 
-      - name: Deploy to GitHub Pages
+      - name: Deploy to Github Pages
         id: deployment
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages
